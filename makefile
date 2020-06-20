@@ -9,20 +9,20 @@ all: msg main
 msg:
 	@echo '--- C++11 ---'
 
-main: main.cpp
+main: src/main.cpp
 	${CXX} ${CXXFLAGS} -O2 -o $@ $< ${SDL2FLAGS}
 
-small: main.cpp
+small: src/main.cpp
 	${CXX} ${CXXFLAGS} -Os -o main $< ${SDL2FLAGS}
 	-strip main
 	-sstrip main
 
-debug: main.cpp
+debug: src/main.cpp
 	${CXX} ${CXXFLAGS} -O0 -g -o main $< ${SDL2FLAGS}
 
 asm: main.asm
 
-main.asm: main.cpp
+main.asm: src/main.cpp
 	${CXX} ${CFLAGS} -S -o main.asm $< ${SDL2FLAGS}
 
 run: msg main
