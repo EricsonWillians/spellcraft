@@ -4,31 +4,31 @@ CXXFLAGS?=-std=c++11 -Wall -pedantic -Werror -Wshadow -Wstrict-aliasing -Wstrict
 
 .PHONY: all msg clean fullclean
 
-all: msg main
+all: msg spellcraft
 
 msg:
 	@echo '--- C++11 ---'
 
-main: src/main.cpp
+spellcraft: src/spellcraft.cpp
 	${CXX} ${CXXFLAGS} -O2 -o $@ $< ${SDL2FLAGS}
 
-small: src/main.cpp
-	${CXX} ${CXXFLAGS} -Os -o main $< ${SDL2FLAGS}
-	-strip main
-	-sstrip main
+small: src/spellcraft.cpp
+	${CXX} ${CXXFLAGS} -Os -o spellcraft $< ${SDL2FLAGS}
+	-strip spellcraft
+	-sstrip spellcraft
 
-debug: src/main.cpp
-	${CXX} ${CXXFLAGS} -O0 -g -o main $< ${SDL2FLAGS}
+debug: src/spellcraft.cpp
+	${CXX} ${CXXFLAGS} -O0 -g -o spellcraft $< ${SDL2FLAGS}
 
-asm: main.asm
+asm: spellcraft.asm
 
-main.asm: src/main.cpp
-	${CXX} ${CFLAGS} -S -o main.asm $< ${SDL2FLAGS}
+spellcraft.asm: src/spellcraft.cpp
+	${CXX} ${CFLAGS} -S -o spellcraft.asm $< ${SDL2FLAGS}
 
-run: msg main
-	time ./main
+run: msg spellcraft
+	time ./spellcraft
 
 clean:
-	rm -f main *.o main.asm
+	rm -f spellcraft *.o spellcraft.asm
 
 fullclean: clean
